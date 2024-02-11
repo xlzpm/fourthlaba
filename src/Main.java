@@ -1,29 +1,43 @@
 public class Main {
 
     public static void main(String[] args) {
-        int[][] array = {
-                {10, 88, 11},
-                {12, 9, 1},
-                {7, 1, 6}
+        int[][] matrix = {
+                {9, 1, 505},
+                {22, 5, 97},
+                {77, 4, 1}
         };
 
-        sortMainDiagonal(array);
-        printArray(array);
+        sortMainDiagonal(matrix);
+        printArray(matrix);
     }
 
-    public static void sortMainDiagonal(int[][] array) {
-        for (int i = 1; i < array.length; i++) {
-            int j = i;
-            while (j > 0 && array[j][j] < array[j-1][j-1]) {
-                // меняем элементы на диагонали, пока текущий не станет больше предыдущего
-                int temp = array[j][j];
-                array[j][j] = array[j-1][j-1];
-                array[j-1][j-1] = temp;
-                j--;
+    public static void sortMainDiagonal(int[][] matrix) {
+        int n = matrix.length;
+        boolean swapped = true;
+        int gap = n;
+
+        // Пока разрыв больше 1 и имеются обмены, продолжаем сортировку
+        while (gap > 1 || swapped) {
+            // Вычисляем новый разрыв
+            gap /= 1.247;
+            if (gap < 1) {
+                gap = 1;
+            }
+
+            swapped = false;
+
+            // Проходим по диагонали с учетом разрыва
+            for (int i = 0; i < n - gap; i++) {
+                if (matrix[i][i] > matrix[i + gap][i + gap]) {
+                    // Обмен значениями
+                    int temp = matrix[i][i];
+                    matrix[i][i] = matrix[i + gap][i + gap];
+                    matrix[i + gap][i + gap] = temp;
+                    swapped = true;
+                }
             }
         }
     }
-
     public static void printArray(int[][] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
@@ -33,4 +47,3 @@ public class Main {
         }
     }
 }
-
