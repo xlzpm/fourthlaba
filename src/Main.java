@@ -1,11 +1,15 @@
+import java.util.Random;
+
 public class Main {
 
     public static void main(String[] args) {
-        int[][] matrix = {
-                {9, 1, 505},
-                {22, 5, 97},
-                {77, 4, 1}
-        };
+        int[][] matrix = new int[3][3];
+        Random rd = new Random();
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[i].length; j++){
+                matrix[i][j] = rd.nextInt(50);
+            }
+        }
 
         sortMainDiagonal(matrix);
         printArray(matrix);
